@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - PATIL Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .menu-section { padding: 60px 20px; text-align: center; }
+  .menu-section h2 { font-family: 'Cinzel', serif; font-size: 36px; color: #f9d423; margin-bottom: 40px; }
+  .food-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+  .food-card { background: rgba(0,0,0,0.6); border: 2px solid #f9d423; border-radius: 15px; padding: 20px; width: 250px; color: #fff; position: relative; transition: transform 0.3s, box-shadow 0.3s; }
+  .food-card:hover { transform: scale(1.05); box-shadow: 0 0 20px #f9d423; }
+  .food-card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+  .food-card h3 { color: #f9d423; margin-bottom: 10px; }
+  .food-card p { margin-bottom: 10px; }
+  .food-card .price { color: #ff4e50; font-weight: 700; }
+  .food-card button { margin-top: 10px; padding: 8px 16px; border-radius: 20px; border: none; background: #f9d423; color: #111; cursor: pointer; transition: 0.3s; position: relative; z-index: 1; }
+  .food-card button:hover { background: #ff4e50; color: #fff; }
+
+  /* Floating message */
+  .float-msg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4e50;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s, transform 0.5s;
+    z-index: 10;
+  }
+
+  .float-msg.show { opacity: 1; transform: translateY(-20px); }
+
+  @media (max-width: 768px) {
+    .food-cards { flex-direction: column; align-items: center; }
+  }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🍴 PATIL VILA</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Feedback</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+         <li><a href="login.html" id="navLoginStatus" class="active">Login</a></li>
+         
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="brand">🍴 Our Menu 🍴</h1>
+      <p class="tagline">Taste the finest dishes with luxury experience</p>
+    </div>
+  </section>
+
+  <!-- Main Menu -->
+  <section class="menu-section" id="main-menu">
+    <h2>Main Menu</h2>
+    <div class="food-cards">
+      <div class="food-card">
+        <img src="images\Grilled Chicken.jpeg" alt="Grilled Chicken">
+        <h3>Grilled Chicken</h3>
+        <p>Juicy chicken grilled with herbs</p>
+        <span class="price">₹499</span>
+        <button onclick="addToCart('Grilled Chicken', 499)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Paneer Butter Masala.jpeg" alt="Paneer Butter Masala">
+        <h3>Paneer Butter Masala</h3>
+        <p>Rich creamy paneer curry</p>
+        <span class="price">₹349</span>
+        <button onclick="addToCart('Paneer Butter Masala', 349)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Fish Curry.jpg" alt="Fish Curry">
+        <h3>Fish Curry</h3>
+        <p>Spicy fish curry with coconut milk</p>
+        <span class="price">₹459</span>
+        <button onclick="addToCart('Fish Curry', 459)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Mutton Rogan Josh.jpeg" alt="Mutton Rogan Josh">
+        <h3>Mutton Rogan Josh</h3>
+        <p>Classic mutton curry with aromatic spices</p>
+        <span class="price">₹599</span>
+        <button onclick="addToCart('Mutton Rogan Josh', 599)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Veg Biryani.jpeg" alt="Veg Biryani">
+        <h3>Veg Biryani</h3>
+        <p>Flavorful rice cooked with vegetables</p>
+        <span class="price">₹299</span>
+        <button onclick="addToCart('Veg Biryani', 299)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Chicken Biryani.webp" alt="Chicken Biryani">
+        <h3>Chicken Biryani</h3>
+        <p>Spiced rice with tender chicken pieces</p>
+        <span class="price">₹399</span>
+        <button onclick="addToCart('Chicken Biryani', 399)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Starters -->
+  <section class="menu-section" id="starters">
+    <h2>Starters</h2>
+    <div class="food-cards">
+      <div class="food-card">
+        <img src="images\Veg Spring Roll.webp" alt="Veg Spring Roll">
+        <h3>Veg Spring Roll</h3>
+        <p>Crispy rolls with vegetables</p>
+        <span class="price">₹199</span>
+        <button onclick="addToCart('Veg Spring Roll', 199)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Chicken Wings.webp" alt="Chicken Wings">
+        <h3>Chicken Wings</h3>
+        <p>Spicy and crispy wings</p>
+        <span class="price">₹249</span>
+        <button onclick="addToCart('Chicken Wings', 249)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Paneer Tikka.webp
+        " alt="Paneer Tikka">
+        <h3>Paneer Tikka</h3>
+        <p>Grilled paneer with spices</p>
+        <span class="price">₹229</span>
+        <button onclick="addToCart('Paneer Tikka', 229)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\French Fries.jpeg" alt="French Fries">
+        <h3>French Fries</h3>
+        <p>Crispy golden fries</p>
+        <span class="price">₹149</span>
+        <button onclick="addToCart('French Fries', 149)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Garlic Bread.jpg" alt="Garlic Bread">
+        <h3>Garlic Bread</h3>
+        <p>Buttery garlic-flavored bread</p>
+        <span class="price">₹129</span>
+        <button onclick="addToCart('Garlic Bread', 129)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Cheese Balls.jpg" alt="Cheese Balls">
+        <h3>Cheese Balls</h3>
+        <p>Crispy balls with melted cheese inside</p>
+        <span class="price">₹179</span>
+        <button onclick="addToCart('Cheese Balls', 179)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drinks -->
+  <section class="menu-section" id="drinks">
+    <h2>Drinks</h2>
+    <div class="food-cards">
+      <div class="food-card">
+        <img src="images\Mango Shake.jpg" alt="Mango Shake">
+        <h3>Mango Shake</h3>
+        <p>Fresh mango blended with milk</p>
+        <span class="price">₹149</span>
+        <button onclick="addToCart('Mango Shake', 149)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Cold Coffee.webp" alt="Cold Coffee">
+        <h3>Cold Coffee</h3>
+        <p>Chilled coffee with ice cream</p>
+        <span class="price">₹129</span>
+        <button onclick="addToCart('Cold Coffee', 129)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src=" images\Lemonade.webp" alt="Lemonade">
+        <h3>Lemonade</h3>
+        <p>Refreshing lemon drink</p>
+        <span class="price">₹99</span>
+        <button onclick="addToCart('Lemonade', 99)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Mojito.jpg " alt="Mojito">
+        <h3>Mojito</h3>
+        <p>Minty refreshing drink</p>
+        <span class="price">₹179</span>
+        <button onclick="addToCart('Mojito', 179)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\Orange Juice.webp" alt="Orange Juice">
+        <h3>Orange Juice</h3>
+        <p>Freshly squeezed oranges</p>
+        <span class="price">₹129</span>
+        <button onclick="addToCart('Orange Juice', 129)">Add to Cart</button>
+      </div>
+      <div class="food-card">
+        <img src="images\tea.webp " alt="Tea">
+        <h3>Tea</h3>
+        <p>Classic Indian tea</p>
+        <span class="price">₹79</span>
+        <button onclick="addToCart('Tea', 79)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const cartCount = document.getElementById('cart-count');
+cartCount.innerText = cart.length;
+
+function addToCart(name, price){
+  const existingItem = cart.find(item => item.name === name);
+  if(existingItem){
+    existingItem.quantity += 1;
+  } else {
+    cart.push({name, price, quantity:1});
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  cartCount.innerText = cart.length;
+
+  // Floating popup
+  const button = event.target;
+  const popup = document.createElement('div');
+  popup.className = 'float-msg';
+  popup.innerText = `✅ ${name} Added`;
+  button.parentElement.appendChild(popup);
+
+  setTimeout(()=> { popup.classList.add('show'); }, 10);
+  setTimeout(()=> { popup.classList.remove('show'); }, 1200);
+  setTimeout(()=> { popup.remove(); }, 1600);
+}
+
+  </script>
+</body>
+</html>

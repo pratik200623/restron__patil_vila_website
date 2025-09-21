@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PATIL Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Cart Modal */
+    #cart-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #cart-content {
+      background: #111;
+      border: 2px solid #f9d423;
+      border-radius: 15px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      color: #fff;
+      text-align: center;
+    }
+    #cart-content h2 { color: #f9d423; margin-bottom: 20px; }
+    .cart-item { display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center; }
+    .cart-item button { padding: 4px 10px; margin-left: 5px; cursor: pointer; border-radius: 15px; border: none; background: #f9d423; color: #111; }
+    #place-order { margin-top: 20px; padding: 12px 30px; border-radius: 30px; border: none; background: #f9d423; font-weight: 600; cursor: pointer; }
+    #place-order:hover { background: #ff4e50; color: #fff; }
+    .close-btn { position: absolute; top: 20px; right: 30px; cursor: pointer; font-size: 24px; color: #f9d423; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🍴 PRATIK PATIL </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+       <!--< <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Feedback</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="#" id="cart-btn">Cart (<span id="cart-count">0</span>)</a></li>>-->
+      <li><a href="login.html" id="navLoginStatus" class="active">Login</a></li>
+      
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="brand">🍴 PATIL VILA 🍴</h1>    <big>  🍴 </big>
+      <p class="tagline">Fine Dining • Modern Taste • Memorable Moments</p>
+      <div class="hero-buttons">
+        <a href="menu.html" class="btn">Explore Menu</a>
+        <a href="booking.html" class="btn btn-outline">Book a Table</a>
+        <a href="login.html" class="btn btn-outline">Login/Sign</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal">
+    <div id="cart-content">
+      <span class="close-btn" onclick="closeCart()">×</span>
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <h3 id="cart-total"></h3>
+      <button id="place-order" onclick="placeOrder()">Place Order</button>
+    </div>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartBtn = document.getElementById('cart-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const cartItemsDiv = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.getElementById('cart-count');
+
+    function updateCartCount() {
+      cartCount.innerText = cart.length;
+    }
+
+    function openCart() {
+      renderCart();
+      cartModal.style.display = 'flex';
+    }
+
+    function closeCart() {
+      cartModal.style.display = 'none';
+    }
+
+    function renderCart() {
+      cartItemsDiv.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <span>${item.name} - ₹${item.price} x ${item.quantity}</span>
+          <div>
+            <button onclick="changeQuantity(${index}, -1)">-</button>
+            <button onclick="changeQuantity(${index}, 1)">+</button>
+            <button onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+        cartItemsDiv.appendChild(div);
+      });
+      cartTotal.innerText = 'Total: ₹' + total;
+    }
+
+    function changeQuantity(index, delta) {
+      cart[index].quantity += delta;
+      if(cart[index].quantity <= 0) cart.splice(index,1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+    }
+
+    function removeItem(index) {
+      cart.splice(index,1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+    }
+
+    function placeOrder() {
+      if(cart.length === 0) { alert('Cart is empty!'); return; }
+      alert('Order placed! You will receive a message on your phone.'); // Simulated
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      closeCart();
+    }
+
+    cartBtn.addEventListener('click', openCart);
+    updateCartCount();
+  </script>
+</body>
+</html>

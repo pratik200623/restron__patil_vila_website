@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | PATIL Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    /* Parallax Background */
+    .about-hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/about-bg.jpg') no-repeat center center/cover;
+      background-attachment: fixed;
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .about-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      background: linear-gradient(90deg, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(249, 212, 35, 0.5);
+    }
+
+    /* Our Story */
+    .story {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .story h2 {
+      font-family: 'Cinzel', serif;
+      color: #f9d423;
+      margin-bottom: 20px;
+    }
+
+    .story p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #ddd;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin: 60px auto;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      background: #f9d423;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(249, 212, 35, 0.2);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .timeline-item h3 {
+      color: #f9d423;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item p {
+      color: #ccc;
+    }
+
+    .timeline-item.left {
+      left: 0;
+      transform: translateX(-10%);
+    }
+
+    .timeline-item.right {
+      left: 50%;
+      transform: translateX(10%);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Team Section */
+    .team {
+      padding: 60px 20px;
+      background: #000;
+      text-align: center;
+    }
+
+    .team h2 {
+      font-family: 'Cinzel', serif;
+      color: #f9d423;
+      margin-bottom: 40px;
+    }
+
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .member {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .member img {
+      width: 100%;
+      border-radius: 50%;
+      border: 3px solid #f9d423;
+      transition: box-shadow 0.3s;
+    }
+
+    .member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(249, 212, 35, 0.4);
+    }
+
+    .member h3 {
+      margin-top: 15px;
+      color: #f9d423;
+    }
+
+    .member p {
+      color: #aaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🍴 PATIL  VILA</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="contact.html">Feedback</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="cart.html">Cart</a></li>
+         <li><a href="login.html" id="navLoginStatus" class="active">Login</a></li>
+         
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="about-hero">
+    <h1>Our Story</h1>
+  </section>
+
+  <!-- Story Section -->
+  <section class="story">
+    <h2>Welcome to PATIL Restaurant</h2>
+    <p>Founded with passion and driven by taste, PATIL Restaurant blends tradition with innovation to deliver unforgettable dining experiences. Our chefs craft each dish with love, sourcing the finest ingredients to ensure authenticity and flavor in every bite.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline">
+    <div class="timeline-item left">
+      <h3>2010 - The Beginning</h3>
+      <p>Our journey started with a small kitchen and a dream to share authentic recipes.</p>
+    </div>
+    <div class="timeline-item right">
+      <h3>2015 - Expansion</h3>
+      <p>We grew into a full restaurant, welcoming guests from across the city.</p>
+    </div>
+    <div class="timeline-item left">
+      <h3>2020 - Recognition</h3>
+      <p>Recognized as one of the finest modern dining experiences in the region.</p>
+    </div>
+    <div class="timeline-item right">
+      <h3>Today</h3>
+      <p>We continue to serve delicious meals and create memories for our valued guests.</p>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="team">
+    <h2>Meet Our Team</h2>
+    <div class="team-members">
+      <div class="member">
+        <img src="images\about1.jpg" alt="Chef 1">
+        <h3>PRATIK PATIL</h3>
+        <p>Head Chef</p>
+      </div>
+      <div class="member">
+        <img src="images\about2.jpg" alt="Chef 2">
+        <h3>PRATIK PATIL</h3>
+        <p>Pastry Specialist</p>
+      </div>
+      <div class="member">
+        <img src="images\about3.jpg" alt="Chef 3">
+        <h3>PRATIK PATIL</h3>
+        <p>Grill Master</p>
+      </div>
+    </div>
+  </section>
+  <script>
+    
+  </script>
+</body>
+</html>

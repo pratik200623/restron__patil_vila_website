@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PATIL Restaurant - Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nav-height: 72px; /* adjust if you want a different navbar height */
+    --gold1: #f9d423;
+    --gold2: #ff4e50;
+    --bg: #111;
+  }
+
+  /* Global reset */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body { height: 100%; background: var(--bg); font-family: 'Poppins', sans-serif; color: #fff; }
+
+  /* NAVBAR - fixed to top, flush (no gap) */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(249,212,35,0.06);
+  }
+
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--gold1), var(--gold2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links { list-style: none; display:flex; gap:20px; align-items:center; }
+  .nav-links a {
+    text-decoration: none;
+    color: #f6f6f6;
+    font-weight: 600;
+    position: relative;
+    padding: 6px 0;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0;
+    background: var(--gold1);
+    transition: width .25s ease;
+  }
+  .nav-links a:hover { color: var(--gold1); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--gold1); }
+
+  /* Keep page content visible below fixed navbar */
+  .page {
+    min-height: 100vh;
+    padding-top: calc(var(--nav-height) + 24px); /* content starts after navbar */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* Center login box */
+  .container {
+    width: 360px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(249,212,35,0.12);
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(249,212,35,0.08);
+    text-align: center;
+  }
+  .container h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold1);
+    margin-bottom: 18px;
+    font-size: 24px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(249,212,35,0.25);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    outline: none;
+    transition: box-shadow .2s ease, transform .08s ease;
+  }
+  input:focus { box-shadow: 0 0 12px rgba(249,212,35,0.45); transform: translateY(-1px); }
+
+  .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    background: linear-gradient(90deg,var(--gold1),var(--gold2));
+    color: #111;
+    margin-top: 10px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(249,212,35,0.25); }
+
+  .toggle-link { margin-top:12px; display:inline-block; color:var(--gold1); cursor:pointer; font-size:14px; }
+
+  /* Popup */
+  .popup {
+    position: fixed;
+    top: 14px;
+    right: 16px;
+    background: linear-gradient(135deg,var(--gold1),var(--gold2));
+    color: #111;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    display: none;
+    z-index: 2000;
+  }
+
+  /* small responsive tweak */
+  @media (max-width:420px){
+    .container { width: 92%; padding:20px; }
+    .nav-links { gap:10px; font-size:14px; }
+    :root { --nav-height: 64px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- NAVBAR (fixed, flush at top) -->
+  <header class="navbar" role="banner">
+    <div class="logo">🍴 PATIL VILA </div>
+    <ul class="nav-links" role="navigation">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Feedback</a></li>
+      <li><a href="booking.html">Booking</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="login.html" id="navLoginStatus" class="active">Login</a></li>
+      
+    </ul>
+  </header>
+
+  <!-- PAGE CONTENT (starts immediately below navbar) -->
+  <main class="page">
+    <div class="container">
+      <h2 id="formTitle">Register</h2>
+
+      <!-- Register -->
+      <form id="registerForm">
+        <input id="regEmail" type="email" placeholder="Enter Email" required />
+        <input id="regAddress" type="text" placeholder="Enter Address" required />
+        <input id="regContact" type="tel" placeholder="Enter Contact No." required />
+        <button class="btn" type="submit">Register</button>
+      </form>
+
+      <!-- Login (hidden initially if not registered) -->
+      <form id="loginForm" style="display:none;">
+        <input id="username" type="email" placeholder="Enter Email" required />
+        <input id="password" type="password" placeholder="Enter Password" required />
+        <button class="btn" type="submit">Login</button>
+      </form>
+
+      <div class="toggle-link" id="toggleLink">Already have an account? Login</div>
+    </div>
+  </main>
+
+  <div id="popup" class="popup">Welcome!</div>
+
+<script>
+  // Elements
+  const registerForm = document.getElementById('registerForm');
+  const loginForm = document.getElementById('loginForm');
+  const toggleLink = document.getElementById('toggleLink');
+  const formTitle = document.getElementById('formTitle');
+  const popup = document.getElementById('popup');
+  const navLoginStatus = document.getElementById('navLoginStatus');
+
+  // If user already registered -> show login by default
+  if(localStorage.getItem('userRegistered') === 'true') showLoginForm();
+
+  toggleLink.addEventListener('click', () => {
+    if(registerForm.style.display === 'none') showRegisterForm();
+    else showLoginForm();
+  });
+
+  function showLoginForm(){
+    registerForm.style.display = 'none';
+    loginForm.style.display = 'block';
+    formTitle.textContent = 'Login';
+    toggleLink.textContent = "Don't have an account? Register";
+  }
+  function showRegisterForm(){
+    registerForm.style.display = 'block';
+    loginForm.style.display = 'none';
+    formTitle.textContent = 'Register';
+    toggleLink.textContent = "Already have an account? Login";
+  }
+
+  // Register: save simple localStorage record (demo only)
+  registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('regEmail').value;
+    const username = email.split('@')[0] || 'User';
+    localStorage.setItem('userRegistered', 'true');
+    localStorage.setItem('username', username);
+    showLoginForm();
+    alert('Registration saved. Please login.');
+  });
+
+  // Login: show popup and update navbar label (demo only)
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = localStorage.getItem('username') || 'User';
+    popup.textContent = `Welcome, ${username}! ✅`;
+    popup.style.display = 'block';
+    navLoginStatus.textContent = 'Logined ✅';
+    setTimeout(()=> popup.style.display = 'none', 3000);
+     const navLoginStatus = document.getElementById('navLoginStatus');
+    const loginForm = document.getElementById('loginForm');
+
+    // Show login status if already logged in
+    if (localStorage.getItem('logined') === 'true') {
+      navLoginStatus.textContent = 'Logined ✅';
+    }
+
+    // Handle login
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      localStorage.setItem('logined', 'true');
+      navLoginStatus.textContent = 'Logined ✅';
+      alert('Login Successful ✅');
+    });
+
+    // Optional: redirect to home automatically after 1.2s (uncomment if desired)
+    // setTimeout(() => window.location.href = 'index.html', 1200);
+  });
+   document.addEventListener("DOMContentLoaded", () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const loginLink = document.getElementById("login-link");
+
+    if (isLoggedIn === "true" && loginLink) {
+      loginLink.innerHTML = "<a href='#'>Logged in</a>";
+    }
+  });
+</script>
+
+</body>
+</html>

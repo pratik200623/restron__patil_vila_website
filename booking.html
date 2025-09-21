@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking - PATIL VILA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .booking-section {
+      padding: 60px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.6);
+      border: 2px solid #f9d423;
+      border-radius: 15px;
+      color: #fff;
+    }
+
+    .booking-section h2 {
+      font-family: 'Cinzel', serif;
+      color: #f9d423;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .booking-section form input, 
+    .booking-section form select {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .booking-section form button {
+      background: #f9d423;
+      color: #111;
+      padding: 12px 25px;
+      border-radius: 30px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    .booking-section form button:hover {
+      background: #ff4e50;
+      color: #fff;
+    }
+
+    @media(max-width: 768px){
+      .booking-section { padding: 40px 15px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🍴 PATIL VILA </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Feedback</a></li>
+        <li><a href="booking.html" class="active">Booking</a></li>
+        <li><a href="#" id="cart-btn">Cart (<span id="cart-count">0</span>)</a></li>
+         <li><a href="login.html" id="navLoginStatus" class="active">Login</a></li>
+         
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="brand">🗓️ Book a Table 🗓️</h1>
+      <p class="tagline">Reserve your spot and enjoy fine dining at PATIL VILA </p>
+    </div>
+  </section>
+
+  <!-- Booking Form Section -->
+  <section class="booking-section">
+    <h2>Table Booking Form</h2>
+    <form id="bookingForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="date" id="date" required>
+      <input type="time" id="time" required>
+      <select id="people" required>
+        <option value="">Number of People</option>
+        <option value="1">1 Person</option>
+        <option value="2">2 People</option>
+        <option value="3">3 People</option>
+        <option value="4">4 People</option>
+        <option value="5">5 People</option>
+        <option value="6">6 People</option>
+        <option value="7">7 People</option>
+        <option value="8">8 People</option>
+      </select>
+      <button type="submit">Book Now</button>
+    </form>
+  </section>
+
+  <script>
+    // Cart functionality
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = document.getElementById('cart-count');
+    cartCount.innerText = cart.length;
+
+    // Booking form submission
+    const bookingForm = document.getElementById('bookingForm');
+    bookingForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const people = document.getElementById('people').value;
+
+      // Simulated confirmation & phone notification
+      alert(`Thank you, ${name}! Your table for ${people} people is booked on ${date} at ${time}. We will contact you at ${phone}.`);
+
+      // Reset form
+      bookingForm.reset();
+    });
+    
+  </script>
+</body>
+</html>
